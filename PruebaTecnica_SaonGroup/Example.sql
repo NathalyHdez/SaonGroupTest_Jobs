@@ -1,0 +1,4 @@
+﻿CREATE TABLE [dbo].[Table]
+(
+	[Job] INT NOT NULL PRIMARY KEY
+)
