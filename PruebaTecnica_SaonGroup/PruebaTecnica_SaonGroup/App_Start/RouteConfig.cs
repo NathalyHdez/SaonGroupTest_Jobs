@@ -18,6 +18,12 @@ namespace PruebaTecnica_SaonGroup
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            //routes.MapRoute(
+            //    name: "NuevoRegistro",
+            //    url: "{controller}/{action}/{id}",
+            //    defaults: new { controller = "NuevoRegistro", action = "NuevoRegistro", id = UrlParameter.Optional }
+            //);
         }
     }
 }

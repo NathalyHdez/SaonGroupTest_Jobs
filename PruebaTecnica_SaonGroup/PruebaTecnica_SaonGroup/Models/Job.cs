@@ -12,7 +12,6 @@ namespace PruebaTecnica_SaonGroup.Models
         public string Description { set; get; }
         public DateTime CreatedAt { set; get; }
         public DateTime? ExpiresAt { set; get; }
-
         public Job() {
             //this.CreatedAt = new DateTime();
             //this.ExpiresAt = new DateTime();

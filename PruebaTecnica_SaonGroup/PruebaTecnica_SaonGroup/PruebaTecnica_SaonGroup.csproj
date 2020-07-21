@@ -139,12 +139,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Conection\Conection.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NuevoRegistroController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Job.cs" />
     <Compile Include="Models\JobModel.cs" />
     <Compile Include="Process\AccesoDatos.cs" />
+    <Compile Include="Process\General.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -156,7 +158,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Jobs.sql" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="App_Data\SaonGroupTestDB.db" />
@@ -185,6 +186,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\NuevoRegistro\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

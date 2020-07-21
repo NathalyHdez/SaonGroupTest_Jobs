@@ -13,16 +13,15 @@ namespace PruebaTecnica_SaonGroup.Controllers
     {
         public ActionResult Index()
         {
-            
             DataSet ds = new DataSet();
             PruebaTecnica_SaonGroup.Conection.Conection conection;
             conection = new PruebaTecnica_SaonGroup.Conection.Conection();
-            conection.EjecutarConsultas("DELETE FROM Jobs; INSERT INTO Jobs (Job, JobTitle, Description, CreatedAt, ExpiresAt ) VALUES(1, '*', '****', '20200720', null)");
-            ds = conection.EjecutarConsultas("SELECT Job idJob, JobTitle, Description, /*strftime('%Y-%m-%d',CreatedAt)*/ CreatedAt, ExpiresAt FROM Jobs");
+            //conection.EjecutarConsultas("DELETE FROM Jobs; INSERT INTO Jobs (Job, JobTitle, Description, CreatedAt, ExpiresAt ) VALUES(1, '*', '****', '20200720', null)");
+            //ds = conection.EjecutarConsultas("SELECT Job idJob, JobTitle, Description, /*strftime('%Y-%m-%d',CreatedAt)*/ CreatedAt, ExpiresAt, (SELECT MAX(idJob) FROM Jobs) MaxIdJob FROM Jobs");
+            ds = conection.EjecutarConsultas(new General().ConsultarRegistros());
 
             List<Job> jobs = new List<Job>();
             jobs = new AccesoDatos().ConvertDataTable<Job>(ds.Tables[0]);
-
 
             JobModel pm = new JobModel();
             pm.Jobs = jobs;

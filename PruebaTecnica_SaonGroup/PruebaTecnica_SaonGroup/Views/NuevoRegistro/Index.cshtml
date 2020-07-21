@@ -1,0 +1,82 @@
+﻿@model PruebaTecnica_SaonGroup.Models.Job
+
+<br />
+<br />
+
+
+<script>
+
+    function onCheck(checkbox) {
+        var ExpirationDate = document.getElementById('ExpirationDate');
+        ExpirationDate.disabled = checkbox.checked;
+
+        if (checkbox.checked) {
+            ExpirationDate.value = ''
+        }
+    }
+
+    function onChange(date) {
+        const today = new Date()
+    }
+
+
+</script>
+
+<h2>Register New Employee</h2>
+@*<form>
+        <div class="form-group">
+            <label for="JobTitle">Job Title</label>
+            <input type="text" class="form-control" id="JobTitletxt" placeholder="Type Job Title" name="JobTitle" required>
+        </div>
+        <div class="form-group">
+            <label for="JobDescription">Job Description</label>
+            <input type="text" class="form-control" id="JobDescriptiontxt" placeholder="Type Job Description" name="JobDescription" required>
+        </div>
+        <div class="form-group">
+            <label for="JobDescription">Expiration Date</label>
+            <input type="date" class="form-control" id="ExpirationDate" name="ExpirationDate" onchange="onChange(this)">
+        </div>
+        <div class="form-group">
+            <input type="checkbox" name="CheckUndefiniedDate" onclick="onCheck(this);" class="custom-control-input">
+            <label class="custom-control-label">Undefined Expiration Date</label>
+        </div>
+
+        <button type="submit" class="btn btn-success">Accept</button>
+
+    </form>*@
+
+
+@using (Html.BeginForm("CrearRegistro", "NuevoRegistro"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="form-group">
+        <label for="JobTitle">Job Title</label>
+        @Html.TextBoxFor(model => model.JobTitle, new { @class = "form-control", placeholder = "Type Job Title", id = "JobTitletxt" })
+        @Html.ValidationMessageFor(model => model.JobTitle)
+    </div>
+    <div class="form-group">
+        <label for="JobDescription">Job Description</label>
+        @Html.TextBoxFor(model => model.Description, new { @class = "form-control", placeholder = "Type Job Description", id = "JobDescriptiontxt" })
+        @Html.ValidationMessageFor(model => model.Description)
+    </div>
+    <div class="form-group">
+        <label for="JobDescription">Expiration Date</label>
+        @Html.TextBoxFor(m => m.ExpiresAt, new { @Value = DateTime.Now.ToString("dd/MM/yyyy"), id = "ExpirationDate", @class = "form-control", @type = "date", @onchange = "onChange(this)" })
+    </div>
+    <div class="form-group">
+        <input type="checkbox" name="CheckUndefiniedDate" onclick="onCheck(this);" class="custom-control-input" id="checkDate">
+        <label class="custom-control-label">Undefined Expiration Date</label>
+    </div>
+
+    <input type="submit" class="btn btn-success" value="Accept">
+    <input type="button" class="btn btn-warning" value="See All" onclick="location.href='@Url.Action("Index", "Home")'" />
+    @*<button class="btn btn-primary" onclick="location.href='@Html.ActionLink("", "Index", "Home", new { area = "" }, null)'">See All</button>*@
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
