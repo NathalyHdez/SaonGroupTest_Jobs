@@ -12,7 +12,6 @@ namespace PruebaTecnica_SaonGroup.Controllers
         // GET: NuevoRegistro
         public ActionResult Index()
         {
-            ViewBag.ItemList = "Computer Shop Item List Page";
             return View();
         }
         
