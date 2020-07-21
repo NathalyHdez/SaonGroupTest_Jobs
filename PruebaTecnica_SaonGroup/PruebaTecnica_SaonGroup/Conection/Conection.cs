@@ -4,8 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.SQLite;
 using System.Data;
-using System.IO;
-using System.Windows.Forms;
+using System.Reflection;
 
 
 namespace PruebaTecnica_SaonGroup.Conection
@@ -40,13 +39,16 @@ namespace PruebaTecnica_SaonGroup.Conection
                 conexion = crearConexionSql();
 
                 Comando = conexion.CreateCommand();
-                Comando.CommandText = SqlQuery;// "SELECT Job, JobTitle, Description, CreatedAt, ExpiresAt FROM Jobs";
+                Comando.CommandText = SqlQuery;
                 Lector = Comando.ExecuteReader();
-                while (Lector.Read())
-                {
-                    string myreader = Lector.GetString(0);
-                    Console.WriteLine(myreader);
-                }
+
+                ds.Tables.Add("DataTableSQL");
+                ds.Tables[0].Load(Lector);
+                //while (Lector.Read())
+                //{
+                //    string myreader = Lector.GetString(0);
+                //    Console.WriteLine(myreader);
+                //}
             }
             catch (Exception ex)
             {

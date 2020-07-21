@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using PruebaTecnica_SaonGroup.Conection;
+using PruebaTecnica_SaonGroup.Process;
+using PruebaTecnica_SaonGroup.Models;
 using System.Data;
 
 namespace PruebaTecnica_SaonGroup.Controllers
@@ -12,11 +13,25 @@ namespace PruebaTecnica_SaonGroup.Controllers
     {
         public ActionResult Index()
         {
+            
             DataSet ds = new DataSet();
             PruebaTecnica_SaonGroup.Conection.Conection conection;
             conection = new PruebaTecnica_SaonGroup.Conection.Conection();
-            ds = conection.EjecutarConsultas("SELECT Job, JobTitle, Description, CreatedAt, ExpiresAt FROM Jobs");
-            return View();
+            conection.EjecutarConsultas("DELETE FROM Jobs; INSERT INTO Jobs (Job, JobTitle, Description, CreatedAt, ExpiresAt ) VALUES(1, '*', '****', '20200720', null)");
+            ds = conection.EjecutarConsultas("SELECT Job idJob, JobTitle, Description, /*strftime('%Y-%m-%d',CreatedAt)*/ CreatedAt, ExpiresAt FROM Jobs");
+
+            List<Job> jobs = new List<Job>();
+            jobs = new AccesoDatos().ConvertDataTable<Job>(ds.Tables[0]);
+
+
+            JobModel pm = new JobModel();
+            pm.Jobs = jobs;
+            pm.TotalCount = pm.Jobs.Count();
+            pm.TotalCount = (pm.TotalCount / pm.PageSize) - (pm.TotalCount % pm.PageSize == 0 ? 1 : 0);
+            
+
+            
+            return View(pm);
         }
 
         public ActionResult About()
