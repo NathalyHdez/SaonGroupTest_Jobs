@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PruebaTecnica_SaonGroup.Conection;
+using System.Data;
 
 namespace PruebaTecnica_SaonGroup.Controllers
 {
@@ -10,6 +12,10 @@ namespace PruebaTecnica_SaonGroup.Controllers
     {
         public ActionResult Index()
         {
+            DataSet ds = new DataSet();
+            PruebaTecnica_SaonGroup.Conection.Conection conection;
+            conection = new PruebaTecnica_SaonGroup.Conection.Conection();
+            ds = conection.EjecutarConsultas("SELECT Job, JobTitle, Description, CreatedAt, ExpiresAt FROM Jobs");
             return View();
         }
 
