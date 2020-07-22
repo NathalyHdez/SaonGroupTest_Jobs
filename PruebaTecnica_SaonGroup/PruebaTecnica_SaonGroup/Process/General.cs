@@ -34,5 +34,24 @@ namespace PruebaTecnica_SaonGroup.Process
 
             return SqlQuery;
         }
+
+        public string EditarRegistro(Job job) {
+            string SqlQuery = "";
+
+            string ExpiredAt = "null";
+
+            if (job.ExpiresAt.HasValue)
+                ExpiredAt = "'" + job.ExpiresAt.Value.ToString("yyyyMMdd") + "'";
+
+
+            SqlQuery = "UPDATE Jobs SET JobTitle = '@JobTitle', Description = '@JobDescription', ExpiresAt = @ExpiresAt WHERE Job = @Job ";
+
+            SqlQuery = SqlQuery.Replace("@JobTitle", job.JobTitle);
+            SqlQuery = SqlQuery.Replace("@JobDescription", job.Description);
+            SqlQuery = SqlQuery.Replace("@ExpiresAt", ExpiredAt);
+            SqlQuery = SqlQuery.Replace("@Job", job.idJob.ToString());
+
+            return SqlQuery;
+        }
     }
 }

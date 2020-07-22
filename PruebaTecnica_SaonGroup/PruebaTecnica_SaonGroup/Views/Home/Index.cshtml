@@ -1,9 +1,20 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Home Page";
 }
 
 <br />
 <br />
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<script>
+    function EditItem(item) {
+        $.get("/Home/Editar", function (data) {
+            $("p").html(data);
+        });
+    }
+</script>
 @*<button class="btn btn-primary">@Html.ActionLink("Nuevo Registro", "Index", "NuevoRegistro", new { area = ""}, null)</button>*@
 
 @*<button class="btn btn-primary" onclick="location.href='@Html.ActionLink("Nuevo Registro", "Index", "NuevoRegistro", new { area = "" }, null)'"></button>*@
@@ -11,7 +22,7 @@
 <input type="button"
        id="NuevoRegistroBtn"
        class="btn btn-primary"
-       value="Nuevo Registro"
+       value="New Item"
        onclick="location.href='@Url.Action("/", "NuevoRegistro")'" />
 
 <hr />
@@ -36,10 +47,15 @@
                 <td>@item.CreatedAt</td>
                 <td>@item.ExpiresAt</td>
                 <td style="text-align: center">
-                    <button class="btn btn-warning" onclick="Editar(@item.idJob)">Editar</button>
+                    @*<button class="btn btn-warning" onclick="Editar(@item)">Editar</button>*@
+                    <input type="button" 
+                           class="btn btn-warning" 
+                           value="Edit" 
+                           onclick="location.href='@Url.Action("Index", "NuevoRegistro", new { idJob = @item.idJob, JobTitle = item.JobTitle, Description = item.Description, ExpiresAt = @item.ExpiresAt })'" />
+                    @*<input type="button" class="btn btn-warning" value="Editar" onclick="location.href='@Url.Action("Editar", "Home", new { idJob = item })'" />*@
+
                     &nbsp;&nbsp;
-                    <button class="btn btn-danger" onclick="Editar(@item.idJob)">Eliminar</button>
-                    @*<a data-value="@item.idJob" href="javascript:void(0)" class="btnEdit">Edit</a>*@
+                    <button class="btn btn-danger" onclick="Eliminar(@item.idJob)">Delete</button>
                 </td>
             </tr>
 

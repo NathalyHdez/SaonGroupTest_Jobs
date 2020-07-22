@@ -22,7 +22,8 @@
 
 </script>
 
-<h2>Register New Employee</h2>
+<h2>@ViewBag.Title.</h2>
+
 @*<form>
         <div class="form-group">
             <label for="JobTitle">Job Title</label>
@@ -46,11 +47,13 @@
     </form>*@
 
 
-@using (Html.BeginForm("CrearRegistro", "NuevoRegistro"))
+@using (Html.BeginForm("Registro", "NuevoRegistro"))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-
+    
+    
+    @Html.TextBoxFor(model => model.idJob, new { style = "display: none;" })
     <div class="form-group">
         <label for="JobTitle">Job Title</label>
         @Html.TextBoxFor(model => model.JobTitle, new { @class = "form-control", placeholder = "Type Job Title", id = "JobTitletxt" })
@@ -63,20 +66,20 @@
     </div>
     <div class="form-group">
         <label for="JobDescription">Expiration Date</label>
-        @Html.TextBoxFor(m => m.ExpiresAt, new { @Value = DateTime.Now.ToString("dd/MM/yyyy"), id = "ExpirationDate", @class = "form-control", @type = "date", @onchange = "onChange(this)" })
+        @Html.TextBoxFor(model => model.ExpiresAt, new { id = "ExpirationDate", @class = "form-control", @type = "date", @onchange = "onChange(this)" })
     </div>
     <div class="form-group">
         <input type="checkbox" name="CheckUndefiniedDate" onclick="onCheck(this);" class="custom-control-input" id="checkDate">
         <label class="custom-control-label">Undefined Expiration Date</label>
     </div>
 
-    <input type="submit" class="btn btn-success" value="Accept">
+    <input type="submit" class="btn btn-success" value="@ViewBag.Message">
     <input type="button" class="btn btn-warning" value="See All" onclick="location.href='@Url.Action("Index", "Home")'" />
     @*<button class="btn btn-primary" onclick="location.href='@Html.ActionLink("", "Index", "Home", new { area = "" }, null)'">See All</button>*@
-}
+    }
 
 
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
