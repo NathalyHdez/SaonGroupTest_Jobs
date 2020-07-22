@@ -55,7 +55,10 @@
                     @*<input type="button" class="btn btn-warning" value="Editar" onclick="location.href='@Url.Action("Editar", "Home", new { idJob = item })'" />*@
 
                     &nbsp;&nbsp;
-                    <button class="btn btn-danger" onclick="Eliminar(@item.idJob)">Delete</button>
+                <input type="button"
+                       class="btn btn-danger"
+                       value="Delete"
+                       onclick="location.href='@Url.Action("Index", "Home", new { idJob = @item.idJob })'" />
                 </td>
             </tr>
 

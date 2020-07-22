@@ -53,5 +53,15 @@ namespace PruebaTecnica_SaonGroup.Process
 
             return SqlQuery;
         }
+
+        public string EliminarRegistro(int idJob)
+        {
+            string SqlQuery = "";
+
+            SqlQuery = "DELETE FROM Jobs WHERE Job = @Job ";
+            SqlQuery = SqlQuery.Replace("@Job", idJob.ToString());
+
+            return SqlQuery;
+        }
     }
 }
