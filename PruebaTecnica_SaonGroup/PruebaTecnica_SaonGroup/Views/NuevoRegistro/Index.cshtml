@@ -24,35 +24,13 @@
 
 <h2>@ViewBag.Title.</h2>
 
-@*<form>
-        <div class="form-group">
-            <label for="JobTitle">Job Title</label>
-            <input type="text" class="form-control" id="JobTitletxt" placeholder="Type Job Title" name="JobTitle" required>
-        </div>
-        <div class="form-group">
-            <label for="JobDescription">Job Description</label>
-            <input type="text" class="form-control" id="JobDescriptiontxt" placeholder="Type Job Description" name="JobDescription" required>
-        </div>
-        <div class="form-group">
-            <label for="JobDescription">Expiration Date</label>
-            <input type="date" class="form-control" id="ExpirationDate" name="ExpirationDate" onchange="onChange(this)">
-        </div>
-        <div class="form-group">
-            <input type="checkbox" name="CheckUndefiniedDate" onclick="onCheck(this);" class="custom-control-input">
-            <label class="custom-control-label">Undefined Expiration Date</label>
-        </div>
-
-        <button type="submit" class="btn btn-success">Accept</button>
-
-    </form>*@
-
 
 @using (Html.BeginForm("Registro", "NuevoRegistro"))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-    
-    
+
+
     @Html.TextBoxFor(model => model.idJob, new { style = "display: none;" })
     <div class="form-group">
         <label for="JobTitle">Job Title</label>
@@ -76,10 +54,10 @@
     <input type="submit" class="btn btn-success" value="@ViewBag.Message">
     <input type="button" class="btn btn-warning" value="See All" onclick="location.href='@Url.Action("Index", "Home")'" />
     @*<button class="btn btn-primary" onclick="location.href='@Html.ActionLink("", "Index", "Home", new { area = "" }, null)'">See All</button>*@
-    }
+}
 
 
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -13,34 +13,33 @@ namespace PruebaTecnica_SaonGroup.Controllers
     {
         public ActionResult Index(int idJob = -1)
         {
-            DataSet ds = new DataSet();
-            PruebaTecnica_SaonGroup.Conection.Conection conection;
-            conection = new PruebaTecnica_SaonGroup.Conection.Conection();
             JobModel pm = new JobModel();
-
-            
-            if (idJob > 0)
+            try
             {
-                ds = conection.EjecutarConsultas(new General().EliminarRegistro(idJob));
+                DataSet ds = new DataSet();
+                PruebaTecnica_SaonGroup.Conection.Conection conection;
+                conection = new PruebaTecnica_SaonGroup.Conection.Conection();
+                
+                if (idJob > 0)
+                {
+                    ds = conection.EjecutarConsultas(new General().EliminarRegistro(idJob));
+                    ViewBag.TheResult = true;
+                }
+                ds = conection.EjecutarConsultas(new General().ConsultarRegistros());
+
+                List<Job> jobs = new List<Job>();
+                jobs = new AccesoDatos().ConvertDataTable<Job>(ds.Tables[0]);
+
+                pm.Jobs = jobs;
+                pm.TotalCount = pm.Jobs.Count();
+                pm.TotalCount = (pm.TotalCount / pm.PageSize) - (pm.TotalCount % pm.PageSize == 0 ? 1 : 0);
+                
+
             }
-            ds = conection.EjecutarConsultas(new General().ConsultarRegistros());
-
-            List<Job> jobs = new List<Job>();
-            jobs = new AccesoDatos().ConvertDataTable<Job>(ds.Tables[0]);
-
-            pm.Jobs = jobs;
-            pm.TotalCount = pm.Jobs.Count();
-            pm.TotalCount = (pm.TotalCount / pm.PageSize) - (pm.TotalCount % pm.PageSize == 0 ? 1 : 0);
-
-
-            //else
-            //{
-            //    //conection.EjecutarConsultas("DELETE FROM Jobs; INSERT INTO Jobs (Job, JobTitle, Description, CreatedAt, ExpiresAt ) VALUES(1, '*', '****', '20200720', null)");
-            //    //ds = conection.EjecutarConsultas("SELECT Job idJob, JobTitle, Description, /*strftime('%Y-%m-%d',CreatedAt)*/ CreatedAt, ExpiresAt, (SELECT MAX(idJob) FROM Jobs) MaxIdJob FROM Jobs");
-
-
-            //}
-
+            catch(Exception ex)
+            {
+                ViewBag.TheResult = false;
+            }
 
             return View(pm);
         }

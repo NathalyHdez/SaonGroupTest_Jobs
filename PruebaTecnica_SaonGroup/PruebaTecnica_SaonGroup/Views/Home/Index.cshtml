@@ -15,10 +15,17 @@
         });
     }
 </script>
-@*<button class="btn btn-primary">@Html.ActionLink("Nuevo Registro", "Index", "NuevoRegistro", new { area = ""}, null)</button>*@
 
-@*<button class="btn btn-primary" onclick="location.href='@Html.ActionLink("Nuevo Registro", "Index", "NuevoRegistro", new { area = "" }, null)'"></button>*@
-@*<input type="button" class="btn btn-primary" value="Nuevo Registro" onclick="location.href='@Url.Action("/", "NuevoRegistro", new { MaxidJob = 1 })'" />*@
+@if (ViewBag.TheResult == true)
+{
+<div class="alert alert-success">
+    <strong>Transaction submitted!</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+}
+
 <input type="button"
        id="NuevoRegistroBtn"
        class="btn btn-primary"
@@ -33,7 +40,7 @@
             <th>Job Title</th>
             <th>Description</th>
             <th>Created At</th>
-            <th>Expired At</th>
+            <th>Expires At</th>
             <th></th>
         </tr>
     </thead>
@@ -47,18 +54,16 @@
                 <td>@item.CreatedAt</td>
                 <td>@item.ExpiresAt</td>
                 <td style="text-align: center">
-                    @*<button class="btn btn-warning" onclick="Editar(@item)">Editar</button>*@
-                    <input type="button" 
-                           class="btn btn-warning" 
-                           value="Edit" 
+                    <input type="button"
+                           class="btn btn-warning"
+                           value="Edit"
                            onclick="location.href='@Url.Action("Index", "NuevoRegistro", new { idJob = @item.idJob, JobTitle = item.JobTitle, Description = item.Description, ExpiresAt = @item.ExpiresAt })'" />
-                    @*<input type="button" class="btn btn-warning" value="Editar" onclick="location.href='@Url.Action("Editar", "Home", new { idJob = item })'" />*@
-
+                    
                     &nbsp;&nbsp;
-                <input type="button"
-                       class="btn btn-danger"
-                       value="Delete"
-                       onclick="location.href='@Url.Action("Index", "Home", new { idJob = @item.idJob })'" />
+                    <input type="button"
+                           class="btn btn-danger"
+                           value="Delete"
+                           onclick="location.href='@Url.Action("Index", "Home", new { idJob = @item.idJob })'" />
                 </td>
             </tr>
 

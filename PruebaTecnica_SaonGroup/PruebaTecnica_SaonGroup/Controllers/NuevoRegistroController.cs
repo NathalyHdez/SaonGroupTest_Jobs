@@ -9,7 +9,7 @@ namespace PruebaTecnica_SaonGroup.Controllers
 {
     public class NuevoRegistroController : Controller
     {
-        // GET: NuevoRegistro
+        
         public ActionResult Index( int idJob = -1, string JobTitle = "", string Description = "", DateTime? ExpiresAt = null)
         {
             if (idJob > 0)
